@@ -1,5 +1,6 @@
 public class App {
     public static void main(String[] args) {
         System.out.println("Hello CI/CD Demo");
+        System.out.println("Trigger scan");
     }
 }
