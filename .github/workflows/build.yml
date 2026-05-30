@@ -24,13 +24,14 @@ jobs:
       - name: Build
         run: mvn clean package
 
-      - name: Upload Artifact
+      - name: Configure JFrog
         run: |
-          jf rt config \
+          jf config add artifactory \
             --url=${{ secrets.JF_URL }} \
             --user=${{ secrets.JF_USER }} \
-            --password=${{ secrets.JF_TOKEN }}
+            --password=${{ secrets.JF_TOKEN }} \
+            --interactive=false
 
-          jf rt upload \
-            "target/*.jar" \
-            "maven-demo-local/"
+      - name: Upload Artifact
+        run: |
+          jf rt u "target/*.jar" "maven-demo-local/"
